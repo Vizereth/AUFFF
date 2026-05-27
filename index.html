@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -606,8 +607,8 @@
                 let add;
                 if (cur === targetDay) {
                     const t16 = new Date(now);
-                    t16.setHours(16, 0, 0, 0);
-                    add = now >= t16 ? 7 : 0;
+                    t16.setHours(15, 0, 0, 0);
+                    add = now >= t15? 7 : 0;
                 } else if (cur < targetDay) {
                     add = targetDay - cur;
                 } else {
@@ -615,7 +616,7 @@
                 }
                 const t = new Date(now);
                 t.setDate(now.getDate() + add);
-                t.setHours(16, 0, 0, 0);
+                t.setHours(15, 0, 0, 0);
                 return t;
             }
 
@@ -644,8 +645,8 @@
             }
 
             function tick() {
-                upd('mon', getNextWeekday16(1));
-                upd('wed', getNextWeekday16(3));
+                upd('mon', getNextWeekday16(4));
+
                 upd('spec', getJune15());
             }
             tick();
