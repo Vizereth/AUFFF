@@ -34,624 +34,334 @@
         body {
             background: #2c1810;
             min-height: 100vh;
+            font-family: 'Inter', sans-serif;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-family: 'Inter', system-ui, sans-serif;
-            padding: 12px;
-            background-image:
-                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.05) 40px, rgba(0,0,0,0.05) 42px),
-                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(0,0,0,0.03) 40px, rgba(0,0,0,0.03) 42px),
-                radial-gradient(ellipse at 50% 30%, rgba(255,180,100,0.15) 0%, transparent 60%);
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(circle at 20% 30%, #4a2c1a 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
-        /* Снег / пар от шаурмы */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background:
-                radial-gradient(ellipse at 50% 70%, rgba(255,200,140,0.06) 0%, transparent 60%);
-        }
-
-        .container {
-            width: 100%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ===== КИОСК ===== */
+        /* Основной контейнер киоска */
         .kiosk {
-            background: linear-gradient(180deg, #e8d5b0 0%, #d4c09a 5%, #c4a87a 30%, #b8956a 100%);
-            border: 6px solid var(--wood-dark);
-            border-radius: 24px 24px 20px 20px;
-            padding: 0;
+            max-width: 480px;
+            width: 100%;
+            background: var(--wood);
+            border-radius: 24px;
+            box-shadow: var(--shadow), inset 0 2px 10px rgba(255,255,255,0.15);
+            position: relative;
+            border: 4px solid var(--wood-dark);
             overflow: hidden;
-            box-shadow:
-                var(--shadow),
-                0 0 0 3px #6b3a20,
-                0 0 0 8px #3b2210,
-                0 0 0 10px #5d3a1a;
+        }
+
+        /* Крыша */
+        .roof {
+            background: var(--brick-dark);
+            height: 30px;
+            background-image: linear-gradient(0deg, #5a2424 0%, #7a3232 100%);
+            border-bottom: 4px solid var(--wood-dark);
             position: relative;
         }
-
-        /* Крыша киоска */
-        .kiosk::before {
+        .roof::after {
             content: '';
             position: absolute;
-            top: -18px;
-            left: -14px;
-            right: -14px;
-            height: 40px;
-            background: linear-gradient(180deg, #7a2e2e 0%, #5d1f1f 100%);
-            border-radius: 8px 8px 0 0;
-            z-index: 2;
-            border: 4px solid #3b1515;
-            box-shadow: 0 4px 0 #3b1515;
-        }
-
-        /* Козырёк */
-        .kiosk::after {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: 20px;
-            right: 20px;
-            height: 6px;
-            background: repeating-linear-gradient(90deg, #f4a742 0px, #f4a742 12px, transparent 12px, transparent 20px);
-            z-index: 3;
-            border-radius: 3px;
-            opacity: 0.7;
-        }
-
-        .kiosk-inner {
-            padding: 36px 20px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            position: relative;
-            z-index: 1;
-            background:
-                radial-gradient(ellipse at 50% 20%, rgba(255,255,200,0.3) 0%, transparent 60%);
-        }
-
-        /* Гирлянда */
-        .garland {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 4px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .bulb {
-            width: 14px;
-            height: 18px;
-            border-radius: 50% 50% 40% 40%;
-            display: inline-block;
-            animation: bulbGlow 1.5s infinite alternate;
-            box-shadow: 0 0 12px currentColor;
-        }
-        .bulb:nth-child(1) { background: #ff6b6b; color: #ff6b6b; animation-delay: 0s; }
-        .bulb:nth-child(2) { background: #ffd93d; color: #ffd93d; animation-delay: 0.3s; }
-        .bulb:nth-child(3) { background: #6bcb77; color: #6bcb77; animation-delay: 0.6s; }
-        .bulb:nth-child(4) { background: #4d96ff; color: #4d96ff; animation-delay: 0.9s; }
-        .bulb:nth-child(5) { background: #ff6b6b; color: #ff6b6b; animation-delay: 1.2s; }
-        .bulb:nth-child(6) { background: #ffd93d; color: #ffd93d; animation-delay: 0.2s; }
-
-        @keyframes bulbGlow {
-            0% { opacity: 0.5; transform: scale(0.9); filter: brightness(0.8); }
-            100% { opacity: 1; transform: scale(1.1); filter: brightness(1.4); }
-        }
-
-        /* Волк-повар */
-        .wolf-chef {
-            width: 90px;
-            height: 90px;
-            background: radial-gradient(circle at 45% 35%, #8b6b4a, #4a3020);
-            border-radius: 50%;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 20px;
+            background: var(--yellow);
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px;
-            border: 4px solid #5d3a1a;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3), inset 0 4px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            animation: chefBounce 3s ease-in-out infinite;
         }
 
-        .wolf-chef:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4), inset 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .wolf-chef:active {
-            transform: scale(0.9);
-        }
-
-        @keyframes chefBounce {
-            0%,100% { transform: translateY(0); }
-            40% { transform: translateY(-6px); }
-            60% { transform: translateY(-2px); }
-        }
-
-        /* Колпак повара */
-        .wolf-chef::after {
-            content: '👨‍🍳';
-            position: absolute;
-            top: -22px;
-            font-size: 28px;
-            pointer-events: none;
-            animation: hatFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes hatFloat {
-            0%,100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-4px) rotate(3deg); }
-        }
-
-        .brand {
-            font-family: 'Pacifico', cursive;
-            font-size: 3rem;
-            color: var(--red);
-            line-height: 1;
-            text-align: center;
-            text-shadow:
-                2px 2px 0 #fff,
-                4px 4px 0 rgba(0,0,0,0.15);
-            cursor: default;
-            letter-spacing: 1px;
-        }
-
-        .brand .accent {
-            color: #e67e22;
-            font-size: 2.4rem;
-        }
-
+        /* Вывеска */
         .sign {
+            background: var(--cream);
+            margin: 20px 16px 10px;
+            padding: 16px;
+            border-radius: 16px;
+            border: 3px solid var(--wood-dark);
+            text-align: center;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .sign h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.8rem;
+            color: var(--red);
+            text-shadow: 2px 2px 0 var(--wood-dark);
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+        .sign .sub {
             font-family: 'Comfortaa', cursive;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #5d3a1a;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            background: rgba(255,255,255,0.6);
-            padding: 6px 20px;
+            font-weight: 600;
+            color: var(--wood);
+            font-size: 0.9rem;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        /* Окно выдачи */
+        .window {
+            background: #1e1e1e;
+            margin: 0 16px;
             border-radius: 20px;
-            border: 1px dashed #8b5e3c;
+            border: 4px solid var(--wood-dark);
+            padding: 6px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
         }
-
-        /* ===== ДОСКА С МЕНЮ (ТАЙМЕРЫ) ===== */
-        .chalkboard {
-            background: linear-gradient(180deg, #3d5a3d 0%, #2d442d 100%);
-            border: 8px solid #5d3a1a;
-            border-radius: 16px;
-            padding: 18px 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            box-shadow:
-                var(--shadow),
-                inset 0 2px 10px rgba(0,0,0,0.3);
-            position: relative;
-        }
-
-        /* Мелкая пыль */
-        .chalkboard::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03) 0%, transparent 50%);
-            pointer-events: none;
-            border-radius: 8px;
-        }
-
-        .board-title {
+        .window-inner {
+            background: var(--chalk-dim);
+            border-radius: 14px;
+            padding: 20px 16px;
+            background-image: linear-gradient(135deg, #d9cdb3 0%, #f5f5f5 100%);
+            border: 2px solid #a3906e;
             text-align: center;
-            font-family: 'Comfortaa', cursive;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--chalk);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 0 0 8px rgba(255,255,255,0.3);
-            position: relative;
-            z-index: 1;
         }
-
-        .timer-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .timer-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .day-name {
+        .counter {
             font-family: 'Comfortaa', cursive;
             font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--chalk);
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-shadow: 0 0 6px rgba(255,255,255,0.2);
+            color: var(--wood-dark);
+            background: rgba(255,255,240,0.7);
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            border: 1px solid var(--wood-light);
         }
-
-        .day-name .icon {
+        .today-special {
+            background: var(--paper);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px dashed var(--brick);
+            font-weight: 700;
+            color: var(--brick-dark);
             font-size: 1.2rem;
         }
-
-        .time-stamp {
-            font-family: 'Comfortaa', cursive;
-            font-weight: 700;
-            font-size: 0.7rem;
-            color: var(--chalk-dim);
-            background: rgba(0,0,0,0.2);
+        .menu-list {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0 10px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .price {
+            background: var(--green);
+            color: white;
+            border-radius: 20px;
             padding: 4px 12px;
-            border-radius: 10px;
-            letter-spacing: 1px;
-            border: 1px dashed rgba(255,255,255,0.2);
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 5px;
         }
 
-        .countdown-row {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .time-cell {
-            flex: 1;
-            min-width: 40px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 10px 4px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .time-cell:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-        .time-cell:active {
-            transform: scale(0.93);
-        }
-
-        .time-val {
-            font-family: 'Comfortaa', monospace;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 0 8px rgba(255,255,255,0.4);
-            font-feature-settings: "tnum";
-            font-variant-numeric: tabular-nums;
-        }
-
-        .time-lbl {
-            font-size: 0.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
-            letter-spacing: 2px;
-        }
-
-        .colon-chalk {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.4);
-            user-select: none;
-        }
-
-        .divider {
-            height: 1px;
-            background: rgba(255,255,255,0.1);
-            margin: 2px 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ===== МЕНЮ ШАУРМЫ ===== */
-        .menu-board {
-            background: linear-gradient(180deg, #faf0dc 0%, #f5e6c8 100%);
-            border: 6px solid #5d3a1a;
+        /* Доска объявлений */
+        .board {
+            background: #2b1a0e;
+            margin: 16px;
             border-radius: 16px;
-            padding: 16px 14px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            box-shadow: var(--shadow);
+            padding: 12px;
+            border: 3px solid var(--wood-light);
             position: relative;
         }
-
-        /* Кнопки меню как бумажные стикеры */
-        .menu-item {
-            background: #fffef5;
-            border: 1px solid #d4c09a;
-            border-radius: 6px;
-            padding: 8px 14px;
+        .board h3 {
             font-family: 'Comfortaa', cursive;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #5d3a1a;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 1px 2px 4px rgba(0,0,0,0.1);
-            position: relative;
-            white-space: nowrap;
-        }
-
-        /* Эффект бумажки */
-        .menu-item::before {
-            content: '';
+            color: var(--chalk);
+            font-size: 0.9rem;
+            text-align: center;
+            background: var(--wood-dark);
+            display: inline-block;
+            padding: 4px 15px;
+            border-radius: 20px;
             position: absolute;
-            top: -1px;
-            left: 10px;
-            right: 10px;
-            height: 1px;
-            background: rgba(0,0,0,0.05);
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            border: 1px solid var(--chalk-dim);
         }
-
-        .menu-item:hover {
-            transform: rotate(-1deg) translateY(-2px);
-            box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
-            border-color: #b8956a;
+        .note {
+            background: #fff9e6;
+            margin: 12px 4px 4px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            transform: rotate(-0.5deg);
+            font-weight: 500;
+            border-left: 6px solid var(--red);
+            color: #2c1810;
         }
-        .menu-item:active {
-            transform: scale(0.95);
-        }
-
-        .menu-item.special {
-            background: #fff8e7;
-            border: 2px solid #e67e22;
-            color: #c0392b;
+        .note .highlight {
             font-weight: 800;
-            box-shadow: 0 2px 8px rgba(230,126,34,0.3);
+            background: var(--yellow);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #2c1810;
+            display: inline-block;
+            margin: 4px 0;
         }
-        .menu-item.special:hover {
-            border-color: #c0392b;
-            box-shadow: 0 4px 16px rgba(192,57,43,0.3);
+        .countdown-timer {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--red);
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+            border: 1px dashed var(--brick);
         }
 
-        /* ===== ПОДВАЛ ===== */
+        /* Кнопка */
+        .order-btn {
+            background: var(--yellow);
+            border: none;
+            width: calc(100% - 32px);
+            margin: 16px;
+            padding: 16px;
+            border-radius: 40px;
+            font-family: 'Comfortaa', cursive;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--wood-dark);
+            background: linear-gradient(180deg, #fbbf5c 0%, #e6901a 100%);
+            box-shadow: 0 6px 0 #b45f06, 0 8px 16px rgba(0,0,0,0.4);
+            border: 2px solid #ffd58c;
+            cursor: pointer;
+            transition: 0.1s ease;
+            letter-spacing: 1px;
+        }
+        .order-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #b45f06, 0 5px 10px rgba(0,0,0,0.4);
+        }
+
         .footer-note {
             text-align: center;
+            color: var(--chalk-dim);
+            font-size: 0.7rem;
+            padding-bottom: 15px;
             font-family: 'Comfortaa', cursive;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: #c4a87a;
-            letter-spacing: 2px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
-
-        .footer-note .paw {
-            display: inline-block;
-            cursor: pointer;
-            transition: transform 0.3s;
+        .blink {
+            animation: blink 1.2s infinite;
         }
-        .footer-note .paw:hover {
-            transform: scale(1.3) rotate(-10deg);
-        }
-
-        @media (max-width: 420px) {
-            .brand {
-                font-size: 2.4rem;
-            }
-            .brand .accent {
-                font-size: 1.8rem;
-            }
-            .wolf-chef {
-                width: 70px;
-                height: 70px;
-                font-size: 38px;
-            }
-            .wolf-chef::after {
-                font-size: 22px;
-                top: -18px;
-            }
-            .time-val {
-                font-size: 1.1rem;
-            }
-            .time-cell {
-                padding: 8px 2px;
-                min-width: 34px;
-            }
-            .menu-item {
-                padding: 6px 10px;
-                font-size: 0.65rem;
-            }
-            .garland {
-                gap: 10px;
-            }
-            .bulb {
-                width: 10px;
-                height: 14px;
-            }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- ===== КИОСК С ВЫВЕСКОЙ ===== -->
-        <div class="kiosk">
-            <div class="kiosk-inner">
-                <!-- Гирлянда -->
-                <div class="garland">
-                    <span class="bulb"></span>
-                    <span class="bulb"></span>
-                    <span class="bulb"></span>
-                    <span class="bulb"></span>
-                    <span class="bulb"></span>
-                    <span class="bulb"></span>
+    <div class="kiosk">
+        <div class="roof"></div>
+        <div class="sign">
+            <h1>АУФфф</h1>
+            <div class="sub">уютный киоск • шаурма от души</div>
+        </div>
+
+        <div class="window">
+            <div class="window-inner">
+                <div class="counter">🕒 Открыто до 23:00</div>
+                <div class="today-special">
+                    ✨ ЧЕТВЕРГ — ДЕНЬ АУФЧИКА ✨
                 </div>
-
-                <!-- Волк-повар -->
-                <div class="wolf-chef" title="Волк-шаурмист">🐺</div>
-
-                <!-- Название -->
-                <h1 class="brand">АУФ<span class="accent">фф</span></h1>
-                <p class="sign">✦ лучшая шаурма ✦</p>
+                <div class="menu-list">
+                    <div><span>🌯 Классика</span><br><span class="price">₽</span></div>
+                    <div><span>🧀 Сырная</span><br><span class="price">₽</span></div>
+                    <div><span>🌶️ Острая</span><br><span class="price">₽</span></div>
+                </div>
+                <div style="font-size:0.8rem; margin-top:5px; color:#5d3a1a;">Соус по легендарному рецепту ✌️</div>
             </div>
         </div>
 
-        <!-- ===== ДОСКА С РАСПИСАНИЕМ ===== -->
-        <div class="chalkboard">
-            <p class="board-title">📋 Когда идём за АУФчиком</p>
-
-            <!-- Понедельник -->
-            <div class="timer-item">
-                <div class="timer-row">
-                    <span class="day-name"><span class="icon">🥙</span> Понедельник</span>
-                    <span class="time-stamp">⏰ 16:00</span>
-                </div>
-                <div class="countdown-row" id="monCountdown">
-                    <div class="time-cell"><span class="time-val" id="monD">00</span><span class="time-lbl">дни</span></div>
-                    <span class="colon-chalk">:</span>
-                    <div class="time-cell"><span class="time-val" id="monH">00</span><span class="time-lbl">час</span></div>
-                    <span class="colon-chalk">:</span>
-                    <div class="time-cell"><span class="time-val" id="monM">00</span><span class="time-lbl">мин</span></div>
-                    <span class="colon-chalk">:</span>
-                    <div class="time-cell"><span class="time-val" id="monS">00</span><span class="time-lbl">сек</span></div>
-                </div>
+        <div class="board">
+            <h3>📌 ДОСКА ОБЪЯВЛЕНИЙ</h3>
+            <div class="note">
+                <span class="highlight">🔥 КАЖДЫЙ ЧЕТВЕРГ 15:00</span><br>
+                День АУФчика! Особая порция + секретный соус в подарок. Только по четвергам в 3 часа дня.
+                <div class="countdown-timer" id="weeklyTimer">Загрузка...</div>
             </div>
-
-            <div class="divider"></div>
-
-            <!-- Среда -->
-            <div class="timer-item">
-                <div class="timer-row">
-                    <span class="day-name"><span class="icon">🌯</span> Среда</span>
-                    <span class="time-stamp">⏰ 16:00</span>
-                </div>
-                <div class="countdown-row" id="wedCountdown">
-                    <div class="time-cell"><span class="time-val" id="wedD">00</span><span class="time-lbl">дни</span></div>
-                    <span class="colon-chalk">:</span>
-                    <div class="time-cell"><span class="time-val" id="wedH">00</span><span class="time-lbl">час</span></div>
-                    <span class="colon-chalk">:</span>
-                    <div class="time-cell"><span class="time-val" id="wedM">00</span><span class="time-lbl">мин</span></div>
-                    <span class="colon-chalk">:</span>
-                    <div class="time-cell"><span class="time-val" id="wedS">00</span><span class="time-lbl">сек</span></div>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <!-- 15 Июня -->
-            <div class="timer-item">
-                <div class="timer-row">
-                    <span class="day-name"><span class="icon">🐺</span> 15 Июня</span>
-                    <span class="time-stamp">🎉 Фирменный АУФчик</span>
-                </div>
-                <div class="countdown-row" id="specCountdown">
-                    <div class="time-cell"><span class="time-val" id="specD">00</span><span class="time-lbl">дни</span></div>
-                    <span class="colon-chalk">:</span>
-                    <div class="time-cell"><span class="time-val" id="specH">00</span><span class="time-lbl">час</span></div>
-                    <span class="colon-chalk">:</span>
-                    <div class="time-cell"><span class="time-val" id="specM">00</span><span class="time-lbl">мин</span></div>
-                    <span class="colon-chalk">:</span>
-                    <div class="time-cell"><span class="time-val" id="specS">00</span><span class="time-lbl">сек</span></div>
-                </div>
+            <div class="note" style="border-left-color: #3d6b3d; margin-top: 16px;">
+                <span class="highlight">🏁 ПОСЛЕДНИЙ ФИРМЕННЫЙ АУФЧИК</span><br>
+                <strong>14 ИЮНЯ</strong> — финальный выпуск легендарного АУФчика. Не пропустите исторический день!
+                <div class="countdown-timer" id="finalTimer">Загрузка...</div>
             </div>
         </div>
 
-        <!-- ===== МЕНЮ ===== -->
-        <div class="menu-board">
-            <span class="menu-item">🥙 Классика</span>
-            <span class="menu-item">🏡 Деревенская</span>
-            <span class="menu-item">🧀 Сырная</span>
-            <span class="menu-item">🌴 Экзотика</span>
-            <span class="menu-item">⛰️ Кавказская</span>
-            <span class="menu-item special">🐺 Фирменный АУФчик</span>
-        </div>
-
-        <!-- ===== ПОДВАЛ ===== -->
-        <p class="footer-note">
-            <span class="paw">🐾</span> ПН · СР · 15 ИЮНЯ <span class="paw">🐾</span>
-        </p>
+        <button class="order-btn" onclick="alert('🏃 Бегу готовить ваш АУФчик! (демо)')">
+            ЗАКАЗАТЬ АУФЧИК
+        </button>
+        <div class="footer-note">⏳ Каждый четверг — маленький праздник</div>
     </div>
 
     <script>
         (function() {
-            function getNextWeekday16(targetDay) {
+            // Последний фирменный АУФчик: 14 июня 2026, 15:00
+            const finalDate = new Date(2026, 5, 14, 15, 0, 0); // месяц 5 = июнь
+            
+            function getNextThursday15() {
                 const now = new Date();
-                const cur = now.getDay();
-                let add;
-                if (cur === targetDay) {
-                    const t16 = new Date(now);
-                    t16.setHours(16, 0, 0, 0);
-                    add = now >= t16 ? 7 : 0;
-                } else if (cur < targetDay) {
-                    add = targetDay - cur;
-                } else {
-                    add = 7 - (cur - targetDay);
+                const target = new Date(now);
+                target.setHours(15, 0, 0, 0);
+                
+                const day = now.getDay(); // 0 вс, 1 пн ... 4 чт
+                
+                if (day === 4 && now >= target) {
+                    // Сегодня четверг, но уже позже 15:00 — следующий четверг
+                    target.setDate(target.getDate() + 7);
+                } else if (day < 4) {
+                    // Пн-Ср → четверг на этой неделе
+                    target.setDate(target.getDate() + (4 - day));
+                } else if (day > 4) {
+                    // Пт-Вс → четверг на следующей неделе
+                    target.setDate(target.getDate() + (7 - (day - 4)));
                 }
-                const t = new Date(now);
-                t.setDate(now.getDate() + add);
-                t.setHours(16, 0, 0, 0);
-                return t;
+                // Если day === 4 и время < 15:00 — target уже сегодня, не меняем
+                
+                return target;
             }
 
-            function getJune15() {
+            function formatTimeLeft(diff) {
+                if (diff <= 0) return "00д 00ч 00м 00с";
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+                return `${String(days).padStart(2,'0')}д ${String(hours).padStart(2,'0')}ч ${String(minutes).padStart(2,'0')}м ${String(seconds).padStart(2,'0')}с`;
+            }
+
+            function updateTimers() {
                 const now = new Date();
-                const y = now.getFullYear();
-                let t = new Date(y, 5, 15, 0, 0, 0, 0);
-                if (now >= t) t = new Date(y + 1, 5, 15, 0, 0, 0, 0);
-                return t;
+                
+                // Таймер до ближайшего четверга 15:00
+                const nextThursday = getNextThursday15();
+                const weeklyDiff = nextThursday - now;
+                document.getElementById('weeklyTimer').textContent = '⏳ до след. АУФчика: ' + formatTimeLeft(weeklyDiff);
+                
+                // Таймер до 14 июня 15:00
+                const finalDiff = finalDate - now;
+                if (finalDiff > 0) {
+                    document.getElementById('finalTimer').textContent = '⏳ до 14 июня: ' + formatTimeLeft(finalDiff);
+                } else {
+                    document.getElementById('finalTimer').textContent = '🏁 Финальный АУФчик уже здесь!';
+                }
             }
 
-            function upd(prefix, target) {
-                const now = new Date();
-                let diff = target - now;
-                if (diff < 0) diff = 0;
-                const ts = Math.floor(diff / 1000);
-                const d = Math.floor(ts / 86400);
-                const h = Math.floor((ts % 86400) / 3600);
-                const m = Math.floor((ts % 3600) / 60);
-                const s = ts % 60;
-                document.getElementById(prefix + 'D').textContent = String(d).padStart(2, '0');
-                document.getElementById(prefix + 'H').textContent = String(h).padStart(2, '0');
-                document.getElementById(prefix + 'M').textContent = String(m).padStart(2, '0');
-                document.getElementById(prefix + 'S').textContent = String(s).padStart(2, '0');
-                return { target, diff };
-            }
-
-            function tick() {
-                upd('mon', getNextWeekday16(1));
-                upd('wed', getNextWeekday16(3));
-                upd('spec', getJune15());
-            }
-            tick();
-            const iv = setInterval(tick, 1000);
-            document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });
-            window.addEventListener('beforeunload', () => clearInterval(iv));
+            updateTimers();
+            setInterval(updateTimers, 1000);
         })();
     </script>
 </body>
